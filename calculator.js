@@ -35,8 +35,8 @@ function appendNumber(number) {
 
 // Function to handle operator button clicks
 function chooseOperator(nextOperator) {
-    // If current input is empty, do nothing
-    if (currentInput === '') {
+    // If current input is empty, and there's no previous input, do nothing
+    if (currentInput === '' && previousInput === '') {
         return;
     }
 
@@ -46,7 +46,12 @@ function chooseOperator(nextOperator) {
     }
 
     operator = nextOperator;
-    previousInput = currentInput;
+    // If currentInput is not empty, set it as previousInput
+    if (currentInput !== '') {
+        previousInput = currentInput;
+    }
+    // Display previous input and the operator
+    display.textContent = previousInput + ' ' + operator;
     currentInput = ''; // Clear currentInput for the next number
     awaitingNewInput = true; // Set flag to true to clear currentInput on next number press
 }
